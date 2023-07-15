@@ -32,8 +32,9 @@ static SListNode* BuySListNode(SLTDateType x)
 //尾插
 void SListPushBack(SListNode** pplist, SLTDateType x)
 {
-	SListNode* newnode = BuySListNode(x);
+	assert(pplist);
 
+	SListNode* newnode = BuySListNode(x);
 	if (*pplist == NULL)
 	{
 		*pplist = newnode;
@@ -53,6 +54,7 @@ void SListPushBack(SListNode** pplist, SLTDateType x)
 //头插
 void SListPushFront(SListNode** pplist, SLTDateType x)
 {
+	assert(pplist);
 	SListNode* newnode = BuySListNode(x);
 	newnode->next = *pplist;
 	*pplist = newnode;
@@ -61,6 +63,7 @@ void SListPushFront(SListNode** pplist, SLTDateType x)
 //尾删
 void SListPopBack(SListNode** pplist)
 {
+	assert(pplist);
 	assert(*pplist);
 	SListNode* tail = *pplist;
 
@@ -85,6 +88,7 @@ void SListPopBack(SListNode** pplist)
 //头删
 void SListPopFront(SListNode** pplist)
 {
+	assert(pplist);
 	assert(*pplist);
 
 	SListNode* ptr = (*pplist)->next;
@@ -110,6 +114,7 @@ SListNode* SListFind(SListNode* plist, SLTDateType x)
 //在pos之后插入数据
 void SListInsertAfter(SListNode* pos, SLTDateType x)
 {
+	assert(pos);
 	SListNode* newnode = BuySListNode(x);
 
 	newnode->next = pos->next;
@@ -119,6 +124,7 @@ void SListInsertAfter(SListNode* pos, SLTDateType x)
 //在pos之后删除数据
 void SListEraseAfter(SListNode* pos)
 {
+	assert(pos);
 	if (pos->next != NULL)
 	{
 		SListNode* ptr = pos->next->next;
@@ -134,6 +140,7 @@ void SListEraseAfter(SListNode* pos)
 //销毁单链表
 void SListDestroy(SListNode* plist)
 {
+	assert(plist);
 	SListNode* cur = plist;
 
 	while (cur)
