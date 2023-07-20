@@ -1,6 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 
+//leetcode:142. 环形链表 II
+//struct ListNode* detectCycle(struct ListNode* head) {
+//    struct ListNode* low = head, * fast = head, * meet = NULL, * start = head;
+//
+//    while (fast && fast->next)
+//    {
+//        fast = fast->next->next;
+//        low = low->next;
+//        if (fast == low)
+//        {
+//            meet = low;
+//            break;
+//        }
+//    }
+//
+//    if (meet == NULL)
+//        return NULL;
+//
+//    while (start != meet)
+//    {
+//        start = start->next;
+//        meet = meet->next;
+//    }
+//    return meet;
+//}
+
 //leetcode:141. 环形链表
 //bool hasCycle(struct ListNode* head) {
 //    if (head == NULL)
