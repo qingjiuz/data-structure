@@ -1,4 +1,4 @@
-#include"Stack.h"
+ï»¿#include"Stack.h"
 
 void test1()
 {
@@ -30,7 +30,7 @@ void test1()
 
 }
 
-//´íÎó½âÌâ
+//é”™è¯¯è§£é¢˜
 //bool isValid(char* s) {
 //    ST ps;
 //    STInit(&ps);
@@ -81,9 +81,9 @@ int main()
     //test1();
 
     //char arr[] = "(){}";
-    
+
     //bool tmp = isValid(&arr);
     //printf("%d ", tmp);
 
-	return 0;
+    return 0;
 }
