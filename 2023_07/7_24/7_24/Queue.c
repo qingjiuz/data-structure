@@ -37,9 +37,23 @@ void QueuePop(Queue* pq)
 	assert(pq);
 	assert(!QueueEmpty(pq));
 
-	QListNode* next = pq->head;
-	pq->head = next->next;
-	free(next);
+	//╢МнС
+	//QListNode* next = pq->head;
+	//pq->head = next->next;
+	//free(next);
+	//pq->data--;
+
+	if (pq->head->next == NULL)
+	{
+		free(pq->head);
+		pq->head = pq->tail = NULL;
+	}
+	else
+	{
+		QListNode* next = pq->head;
+		pq->head = next->next;
+		free(next);
+	}
 	pq->data--;
 }
 
@@ -74,7 +88,7 @@ int QueueEmpty(Queue* pq)
 {
 	assert(pq);
 
-	return !pq->data;
+	return pq->data == 0;
 }
 
 //оЗ╩ы╤сап
