@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include<stdbool.h>
+#include<time.h>
 
 typedef int HeapDataType;
 
@@ -15,6 +16,7 @@ typedef struct Heap
 }HP;
 
 void HeapInit(HP* php);
+void HeapInitArray(HP* php, int* a, int size);
 void HeapDsetroy(HP* php);
 
 void AdjustUp(HeapDataType* a, int child);

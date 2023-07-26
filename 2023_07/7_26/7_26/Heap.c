@@ -17,6 +17,28 @@ void HeapInit(HP* php)
 	php->size = 0;
 }
 
+//建堆初始化
+void HeapInitArray(HP* php, int* a, int size)
+{
+	assert(php);
+
+	HeapDataType* ptr = (HeapDataType*)malloc(sizeof(HeapDataType) * size);
+	if (ptr == NULL)
+	{
+		perror("malloc fail");
+		return;
+	}
+
+	php->capacity = size;
+	php->size = size;
+
+	//建堆
+	for (int i = (size - 2) / 2; i >= 0; i--)
+	{
+		AdjustDown(php->a, php->size, i);
+	}
+}
+
 //销毁堆
 void HeapDsetroy(HP* php)
 {
@@ -80,12 +102,12 @@ void AdjustDown(HeapDataType* a, int size, int parent)
 	int child = parent * 2 + 1;
 	while (child < size)
 	{
-		if (child + 1 < size && a[child] < a[child + 1])//<:建大堆 >:建小堆
+		if (child + 1 < size && a[child] > a[child + 1])//<:建大堆 >:建小堆
 		{
 			child++;
 		}
 
-		if (a[parent] < a[child])//<:建大堆 >:建小堆
+		if (a[parent] > a[child])//<:建大堆 >:建小堆
 		{
 			Swap(&a[parent], &a[child]);
 			parent = child;
