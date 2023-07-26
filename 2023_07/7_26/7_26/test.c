@@ -32,10 +32,16 @@
 //排升序-建大堆    排降序-建小堆 （调整向上、向下调整的比较符号）
 void HeapSort(HeapDataType* a, int size)
 {
-	//向上调整
-	for (int i = 1; i < size; i++)
+	//向上调整建堆  时间复杂度：O(N*logN)
+	//for (int i = 1; i < size; i++)
+	//{
+	//	AdjustUp(a, i);
+	//}
+
+	//向下调整建堆  时间复杂度：O(N)
+	for (int i = (size - 2) / 2; i >= 0; i--)//size-2 => size-1-1 需要减多一次1找到下标位置
 	{
-		AdjustUp(a, i);
+		AdjustDown(a, size, i);
 	}
 
 	//向下调整
