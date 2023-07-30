@@ -30,17 +30,29 @@ BTNode* BinaryTreeCreate(BTDataType* a, int* pi)
 }
 
 //二叉树销毁
-void BinaryTreeDestory(BTNode** root)
+//void BinaryTreeDestory(BTNode** root)
+//{
+//	if (*root == NULL)
+//		return;
+//
+//	BinaryTreeDestory(&(*root)->left);
+//	BinaryTreeDestory(&(*root)->right);
+//
+//	free(*root);
+//	*root = NULL;
+//}
+
+void BinaryTreeDestory(BTNode* root)
 {
-	if (*root == NULL)
+	if (root == NULL)
 		return;
 
-	BinaryTreeDestory(&(*root)->left);
-	BinaryTreeDestory(&(*root)->right);
+	BinaryTreeDestory(root->left);
+	BinaryTreeDestory(root->right);
 
-	free(*root);
-	*root = NULL;
+	free(root);
 }
+
 
 //二叉树节点个数
 int BinaryTreeSize(BTNode* root)
@@ -159,19 +171,74 @@ void BinaryTreeLevelOrder(BTNode* root)
 }
 
 //判断二叉树是否完全二叉树
-int BinaryTreeComplete(BTNode* root)
+
+//错误的（无法检查类似"124###35###"的情况）
+//int BinaryTreeComplete(BTNode* root)
+//{
+//	int flag = 1;
+//	if (root->left == NULL && root->right == NULL)
+//		return 1;
+//	else if (root->left == NULL && root->right != NULL)
+//		return 0;
+//
+//	if (flag && root->left)
+//		flag = BinaryTreeComplete(root->left);
+//
+//	if (flag && root->right)
+//		flag = BinaryTreeComplete(root->right);
+//
+//	return flag;
+//}
+
+bool BinaryTreeComplete(BTNode* root)
 {
-	int flag = 1;
-	if (root->left == NULL && root->right == NULL)
-		return 1;
-	else if (root->left == NULL && root->right != NULL)
-		return 0;
+	Queue q;
+	QueueInit(&q);
 
-	if (flag && root->left)
-		flag = BinaryTreeComplete(root->left);
+	if (root)
+		QueuePush(&q, root);
 
-	if (flag && root->right)
-		flag = BinaryTreeComplete(root->right);
+	while (!QueueEmpty(&q))
+	{
+		//释放队列的头
+		BTNode* front = QueueFront(&q);
+		if (front == NULL)
+			break;
+		
+		QueuePop(&q);
 
-	return flag;
+		//带入根的左右子树
+		QueuePush(&q, front->left);
+		QueuePush(&q, front->right);
+	}
+
+	//正确的
+	//Queue* ptr = &q;
+	//while (ptr->head)
+	//{
+	//	if (ptr->head->data != NULL)
+	//	{
+	//		QueueDestroy(&q);
+	//		return false;
+	//	}
+	//
+	//	ptr->head = ptr->head->next;
+	//}
+
+	//判断是否完全二叉树
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+
+		//判断队列后面是否为非空，数据有非空说明不是完全连续
+		if (front)
+		{
+			QueueDestroy(&q);
+			return false;
+		}
+	}
+
+	QueueDestroy(&q);
+	return true;
 }

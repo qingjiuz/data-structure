@@ -13,7 +13,7 @@ typedef struct BinaryTreeNode
 BTNode* BinaryTreeCreate(BTDataType* a, int* pi);
 
 //二叉树销毁
-void BinaryTreeDestory(BTNode** root);
+void BinaryTreeDestory(BTNode* root);
 
 //二叉树节点个数
 int BinaryTreeSize(BTNode* root);
@@ -40,4 +40,4 @@ void BinaryTreePostOrder(BTNode* root);
 void BinaryTreeLevelOrder(BTNode* root);
 
 //判断二叉树是否完全二叉树
-int BinaryTreeComplete(BTNode* root);
+bool BinaryTreeComplete(BTNode* root);

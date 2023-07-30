@@ -2,7 +2,10 @@
 
 int main()
 {
-	BTDataType a[] = "124##5##36###";
+	//Ç°Ðò±éÀúµÄ×Ö·û´®
+	//"124###35###"
+	//"124##5##36###"
+	BTDataType a[] = "124###35###";
 
 	int i = 0;
 	BTNode* pa = BinaryTreeCreate(a, &i);
@@ -24,7 +27,8 @@ int main()
 
 	printf("TreeComplete:%d\n", BinaryTreeComplete(pa));
 
-	BinaryTreeDestory(&pa);
+	BinaryTreeDestory(pa);
+	pa = NULL;
 
 	return 0;
 }
